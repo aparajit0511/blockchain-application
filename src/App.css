@@ -11,6 +11,7 @@
   justify-content: center;
   padding: 15px;
   font-size: large;
+
   /* 
   font-family: "Courier New", Courier, monospace; */
 }
@@ -21,6 +22,7 @@
   padding: 15px;
   justify-content: center;
   flex-direction: column;
+  row-gap: 20px;
 }
 
 .mini-container {
@@ -31,9 +33,3 @@
   border-radius: 15px;
   padding: 25px;
 }
-
-/* display: "flex",
-flexDirection: "row",
-justifyContent: "center",
-border: "1px solid white",
-padding: "25px", */

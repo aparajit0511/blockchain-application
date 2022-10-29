@@ -11,6 +11,7 @@ const ViewChart = (props) => {
   const [ChartData, setChartData] = useState("");
   const [Prices, setPrices] = useState([]);
 
+  // Dispatching ChartData api
   useEffect(() => {
     fetchCoinData(CryptoID);
   }, [CryptoID]);
@@ -33,14 +34,9 @@ const ViewChart = (props) => {
     if (ChartData && ChartData.prices) _Prices = ChartData.prices.slice(1, 13);
     setPrices(_Prices);
   }, [ChartData]);
-  //   console.log(
-  //     "Prices",
-  //    Prices
-  //   );
 
   var LineChart = {};
 
-  // useEffect(() => {
   LineChart = {
     labels:
       Prices &&
@@ -55,11 +51,6 @@ const ViewChart = (props) => {
       },
     ],
   };
-  // }, [ChartData]);
-
-  var LineChart_Prices = {};
-
-  //   ChartData && ChartData.map((result) => console.log("Linechart", result));
 
   const style = {
     position: "absolute",

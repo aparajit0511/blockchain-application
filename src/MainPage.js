@@ -1,9 +1,6 @@
 import React, { useCallback, useEffect, useState } from "react";
 import "./App.css";
-import Select from "react-select";
-import Box from "@mui/material/Box";
-import { Typography } from "@mui/material";
-import FormControl from "@mui/material/FormControl";
+
 import { DataGrid } from "@mui/x-data-grid";
 import { useDispatch, useSelector } from "react-redux";
 import { getCoinList } from "./redux/CoinListSlice";
@@ -24,17 +21,19 @@ export default function MainPage() {
 
   const [Rows, setRows] = useState([]);
   const dispatch = useDispatch();
+  // Getting coins list from reducer
   const { CoinListData, Error } = useSelector((state) => state.CoinList);
 
+  // Dispatching coins list api
   useEffect(() => {
     dispatch(getCoinList());
   }, []);
 
-  // useMemo / useCallback here
   useEffect(() => {
     var UpdatedArray = [];
     var rows = {};
 
+    // Creating row data
     CoinListData &&
       CoinListData.map(
         (result, index) => (
@@ -61,11 +60,12 @@ export default function MainPage() {
     setWalletBalance(sum.toFixed(2));
   }, [CoinNames]);
 
+  // Hanndle Click for Buy Button
   const handleClick = (event, cellValues) => {
     var { name, current_price } = cellValues.row;
     current_price = parseFloat(current_price.replace("$", ""));
     current_price = current_price.toFixed(2);
-    // current_price = Math.floor(current_price);
+
     console.log("buy", name, current_price);
 
     if (name in CoinNames) {
@@ -82,6 +82,8 @@ export default function MainPage() {
       }));
     }
   };
+
+  // Handle Click for sell Button
 
   const handleSellClick = (event, cellValues) => {
     var { name, current_price } = cellValues.row;
@@ -100,29 +102,15 @@ export default function MainPage() {
     }
   };
 
-  // const handleOpen = useCallback((event, cellValues) => {
-  //   console.log("ChartJS", cellValues.row.Crypto_id);
-  //   if (JSON.stringify(CryptoID) !== JSON.stringify(cellValues.row.Crypto_id)) {
-  //     setCryptoID(cellValues.row.Crypto_id);
-  //     setOpen(true);
-  //   }
-
-  //   // setCryptoID(cellValues.row.Crypto_id);
-  //   // setOpen(true);
-  // }, []);
-
   const handleOpen = (event, cellValues) => {
     console.log("ChartJS", cellValues.row.Crypto_id);
-    // if (JSON.stringify(CryptoID) !== JSON.stringify(cellValues.row.Crypto_id)) {
-    //   setCryptoID(cellValues.row.Crypto_id);
-    //   setOpen(true);
-    // }
 
     setCryptoID(cellValues.row.Crypto_id);
     setOpen(true);
   };
   const handleClose = () => setOpen(false);
 
+  // Creating Columns
   const columns = [
     { field: "id", headerName: "#", width: 20 },
     { field: "name", headerName: "Coin Name", width: 200 },
@@ -130,7 +118,7 @@ export default function MainPage() {
     { field: "market_cap", headerName: "Market Cap", width: 200 },
     {
       field: "Buy",
-      width: 100,
+      width: 200,
       renderCell: (cellValues) => {
         return (
           <Button
@@ -147,7 +135,7 @@ export default function MainPage() {
     },
     {
       field: "Sell",
-      width: 100,
+      width: 200,
       renderCell: (cellValues) => {
         return (
           <Button
@@ -165,7 +153,7 @@ export default function MainPage() {
 
     {
       field: "Chart",
-      width: 200,
+      width: 180,
       renderCell: (cellValues) => {
         return (
           <>
@@ -200,36 +188,14 @@ export default function MainPage() {
     >
       MainPage
       <div className="container1">
-        <div
-          //   style={{
-          //     display: "flex",
-          //     flexDirection: "row",
-          //     justifyContent: "center",
-          //     border: "1px solid white",
-          //     padding: "25px",
-          //   }}
-          className="mini-container"
-        >
-          Wallet Balance - ${WalletBalance}
-        </div>
-        {/* <div className="mini-container">
-          <Box sx={{ minWidth: 120 }}>
-            <FormControl sx={{ m: 1, minWidth: 300 }}>
-              <Typography
-                style={{ color: "aliceblue", fontFamily: "monospace" }}
-              >
-                Search coins
-              </Typography>
-              <Select />
-            </FormControl>
-          </Box>
-        </div> */}
+        <div className="mini-container">Wallet Balance - ${WalletBalance}</div>
+
         <div className="mini-container">
           <div
             style={{
               height: 300,
               width: "100%",
-              color: "red",
+
               backgroundColor: "white",
             }}
           >

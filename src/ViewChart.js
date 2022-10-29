@@ -7,7 +7,6 @@ import { Chart as ChartJS } from "chart.js/auto";
 import moment from "moment";
 
 const ViewChart = (props) => {
-  //   var moment = require("moment");
   const { CryptoID } = props;
   const [ChartData, setChartData] = useState("");
   const [Prices, setPrices] = useState([]);

@@ -1,6 +1,10 @@
 {
   "name": "density-exchange",
   "version": "0.1.0",
+  "engines": {
+    "npm": ">=8.0.0 <9.0.0",
+    "node": ">=16.0.0 <17.0.0"
+  },
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.10.5",
